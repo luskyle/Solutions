@@ -1,0 +1,52 @@
+site_name: Solutions · 工控上位机实战
+site_url: https://luskyle.github.io/Solutions/
+repo_url: https://github.com/luskyle/Solutions
+repo_name: luskyle/Solutions
+edit_uri: edit/master/docs/
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+
+plugins:
+  - search:
+      lang:
+        - en
+        - zh
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+nav:
+  - 首页: index.md
+  - 专题:
+      - 无边框窗体与视觉细节: topics/01-window-vfx.md
+      - DataGridView 实战: topics/02-datagridview.md
+      - Excel 导出（NPOI）: topics/03-excel-npoi.md
+      - 条码与图形: topics/04-barcode-graphics.md
+      - 产线集成: topics/05-line-integration.md
+      - 异步与文件 IO: topics/06-async-io.md
+      - 打包与交付: topics/07-packaging-delivery.md
+      - 系统集成小技巧: topics/08-system-integration.md

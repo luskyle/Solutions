@@ -1,6 +1,7 @@
-
 .DS_Store
 OS/.DS_Store
 node_modules
 public
 db.json
+site/
+.venv/
