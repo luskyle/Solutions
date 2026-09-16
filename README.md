@@ -20,7 +20,7 @@
 | [Excel 导出（NPOI）](docs/topics/03-excel-npoi.md)     | 撰写中 |
 | [条码与图形](docs/topics/04-barcode-graphics.md)       | 撰写中 |
 | [产线集成](docs/topics/05-line-integration.md)         | 已发布 |
-| [异步与文件 IO](docs/topics/06-async-io.md)            | 撰写中 |
+| [异步与文件 IO](docs/topics/06-async-io.md)            | 已发布 |
 | [打包与交付](docs/topics/07-packaging-delivery.md)     | 撰写中 |
 | [系统集成小技巧](docs/topics/08-system-integration.md) | 撰写中 |
 

@@ -11,7 +11,7 @@
 | [Excel 导出（NPOI）](topics/03-excel-npoi.md) | 样式、合并单元格、列宽自适应 | 撰写中 |
 | [条码与图形](topics/04-barcode-graphics.md) | Code128/Code39、截图、绘图 | 撰写中 |
 | [产线集成](topics/05-line-integration.md) | PLC 地址表、打印机、Access、部署权限 | 已发布 |
-| [异步与文件 IO](topics/06-async-io.md) | Async/Await、文件 IO、目录搜索 | 撰写中 |
+| [异步与文件 IO](topics/06-async-io.md) | Async/Await、文件 IO、目录搜索 | 已发布 |
 | [打包与交付](topics/07-packaging-delivery.md) | VS 打包、inno setup、注册 ocx、权限 | 撰写中 |
 | [系统集成小技巧](topics/08-system-integration.md) | 全局快捷键、特殊图标、进程管理 | 撰写中 |
 
@@ -27,4 +27,5 @@
 
 | 日期 | 内容 |
 | --- | --- |
+| 2026-09-16 | 发布专题《产线集成》《异步与文件 IO》 |
 | 2026-09-16 | 仓库收尾：素材库迁移至 `docs/`、新增站点与专题导航，旧的 Hexo/Travis/gh-pages 发布流程退役 |
