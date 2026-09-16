@@ -13,7 +13,7 @@
 | [产线集成](topics/05-line-integration.md) | PLC 地址表、打印机、Access、部署权限 | 已发布 |
 | [异步与文件 IO](topics/06-async-io.md) | Async/Await、文件 IO、目录搜索 | 已发布 |
 | [打包与交付](topics/07-packaging-delivery.md) | VS 打包、inno setup、注册 ocx、权限 | 撰写中 |
-| [系统集成小技巧](topics/08-system-integration.md) | 全局快捷键、特殊图标、进程管理 | 撰写中 |
+| [系统集成小技巧](topics/08-system-integration.md) | 快捷键、U 盘与端口排查、注册表配置 | 已发布 |
 
 !!! note "素材库"
     2017–2024 年间积累的 200+ 篇原始笔记随站点发布，可用站内搜索找到，但不在左侧导航中。密钥、注册码等不便公开的内容存放在仓库根目录的 `offline/` 下，不会发布。
@@ -27,5 +27,5 @@
 
 | 日期 | 内容 |
 | --- | --- |
-| 2026-09-16 | 发布专题《产线集成》《异步与文件 IO》 |
+| 2026-09-16 | 发布专题《产线集成》《异步与文件 IO》《系统集成小技巧》 |
 | 2026-09-16 | 仓库收尾：素材库迁移至 `docs/`、新增站点与专题导航，旧的 Hexo/Travis/gh-pages 发布流程退役 |
