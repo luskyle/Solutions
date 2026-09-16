@@ -7,7 +7,7 @@
 | 专题 | 定位 | 状态 |
 | --- | --- | --- |
 | [无边框窗体与视觉细节](topics/01-window-vfx.md) | WPF/Winform 自绘窗口：拖动、阴影、缩放、Popup | 撰写中 |
-| [DataGridView 实战](topics/02-datagridview.md) | 产线界面核心控件：自绘、排序、编辑、滚动 | 撰写中 |
+| [DataGridView 实战](topics/02-datagridview.md) | 产线界面核心控件：自绘、排序、编辑、滚动 | 已发布 |
 | [Excel 导出（NPOI）](topics/03-excel-npoi.md) | 样式、合并单元格、列宽自适应 | 撰写中 |
 | [条码与图形](topics/04-barcode-graphics.md) | Code128/Code39、截图、绘图 | 撰写中 |
 | [产线集成](topics/05-line-integration.md) | PLC 地址表、打印机、Access、部署权限 | 已发布 |
@@ -27,5 +27,5 @@
 
 | 日期 | 内容 |
 | --- | --- |
-| 2026-09-16 | 发布专题《产线集成》《异步与文件 IO》《系统集成小技巧》 |
+| 2026-09-16 | 发布专题《DataGridView 实战》《产线集成》《异步与文件 IO》《系统集成小技巧》 |
 | 2026-09-16 | 仓库收尾：素材库迁移至 `docs/`、新增站点与专题导航，旧的 Hexo/Travis/gh-pages 发布流程退役 |

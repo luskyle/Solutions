@@ -20,7 +20,7 @@
 | 专题                                                  | 状态   |
 | ----------------------------------------------------- | ------ |
 | [无边框窗体与视觉细节](docs/topics/01-window-vfx.md)   | 撰写中 |
-| [DataGridView 实战](docs/topics/02-datagridview.md)    | 撰写中 |
+| [DataGridView 实战](docs/topics/02-datagridview.md)    | 已发布 |
 | [Excel 导出（NPOI）](docs/topics/03-excel-npoi.md)     | 撰写中 |
 | [条码与图形](docs/topics/04-barcode-graphics.md)       | 撰写中 |
 | [产线集成](docs/topics/05-line-integration.md)         | 已发布 |
