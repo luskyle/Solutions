@@ -22,6 +22,7 @@
 
 - 生成器：MkDocs（Material 主题），部署：GitHub Actions → GitHub Pages
 - 源码：[luskyle/Solutions](https://github.com/luskyle/Solutions)
+- 协议：[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans)（署名 - 相同方式共享）
 
 ## 更新记录
 
