@@ -10,7 +10,7 @@
 | [DataGridView 实战](topics/02-datagridview.md) | 产线界面核心控件：自绘、排序、编辑、滚动 | 撰写中 |
 | [Excel 导出（NPOI）](topics/03-excel-npoi.md) | 样式、合并单元格、列宽自适应 | 撰写中 |
 | [条码与图形](topics/04-barcode-graphics.md) | Code128/Code39、截图、绘图 | 撰写中 |
-| [产线集成](topics/05-line-integration.md) | PLC 地址表、打印机、Access、部署权限 | 撰写中 |
+| [产线集成](topics/05-line-integration.md) | PLC 地址表、打印机、Access、部署权限 | 已发布 |
 | [异步与文件 IO](topics/06-async-io.md) | Async/Await、文件 IO、目录搜索 | 撰写中 |
 | [打包与交付](topics/07-packaging-delivery.md) | VS 打包、inno setup、注册 ocx、权限 | 撰写中 |
 | [系统集成小技巧](topics/08-system-integration.md) | 全局快捷键、特殊图标、进程管理 | 撰写中 |
