@@ -1,0 +1,22 @@
+{
+  "name": "solutions-knowledge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Code OSS based folder-native knowledge desktop workbench",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "kb": "node knowledge/cli.js",
+    "start": "node desktop/tools.mjs start",
+    "desktop:prepare": "node desktop/tools.mjs prepare",
+    "desktop:sync": "node desktop/tools.mjs sync",
+    "desktop:check": "npm --prefix desktop/extension run check",
+    "desktop:test": "npm --prefix desktop/extension test",
+    "desktop:smoke": "node desktop/smoke.mjs",
+    "legacy:web": "node knowledge/cli.js serve",
+    "test": "node --test knowledge/test/*.test.js && npm run desktop:test",
+    "check": "node --check knowledge/core.js && node --check knowledge/text.js && node --check knowledge/model.js && node --check knowledge/server.js && node --check knowledge/cli.js && node --check knowledge/web/app.js && node --check desktop/tools.mjs && node --check desktop/smoke.mjs && npm run desktop:check"
+  }
+}

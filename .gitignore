@@ -5,3 +5,7 @@ public
 db.json
 site/
 .venv/
+.knowledge/
+.desktop/
+desktop/extension/dist/
+desktop/extension/node_modules/

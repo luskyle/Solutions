@@ -1,0 +1,20 @@
+{
+  "nameShort": "Knowledge Workbench",
+  "nameLong": "Knowledge Workbench",
+  "applicationName": "knowledge-workbench",
+  "dataFolderName": ".knowledge-workbench",
+  "sharedDataFolderName": ".knowledge-workbench-shared",
+  "urlProtocol": "knowledge-workbench",
+  "linuxDesktopName": "org.solutions.KnowledgeWorkbench",
+  "linuxIconName": "knowledge-workbench",
+  "darwinBundleIdentifier": "org.solutions.knowledge-workbench",
+  "win32MutexName": "knowledge-workbench",
+  "win32NameVersion": "Knowledge Workbench",
+  "win32DirName": "Knowledge Workbench",
+  "win32RegValueName": "KnowledgeWorkbench",
+  "win32AppUserModelId": "Solutions.KnowledgeWorkbench",
+  "win32ShellNameShort": "Knowledge Workbench",
+  "reportIssueUrl": "https://github.com/luskyle/Solutions/issues",
+  "enableTelemetry": false,
+  "builtInExtensions": []
+}

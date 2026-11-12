@@ -1,0 +1,41 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const CLI = fileURLToPath(new URL('../cli.js', import.meta.url));
+
+test('CLI round-trip persists sources, supports explicit legacy import, and reports failures', async (t) => {
+  const directory = await mkdtemp(path.join(tmpdir(), 'solutions-cli-'));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const docs = path.join(directory, 'notes');
+  const db = path.join(directory, 'data', 'knowledge.sqlite');
+  await mkdir(docs);
+  await writeFile(path.join(docs, 'sample.md'), '# CLI sample\n`NPOI` 用于 Excel 导出。');
+  await writeFile(path.join(docs, 'legacy.txt'), Buffer.from([0xd6, 0xd0, 0xce, 0xc4]));
+  const run = (...args) => spawnSync(process.execPath, [CLI, ...args, '--db', db], { encoding: 'utf8' });
+  let result = run('import', docs);
+  assert.equal(result.status, 1);
+  assert.equal(JSON.parse(result.stdout).failed.length, 1);
+  result = run('import', docs, '--legacy-encoding', 'gb18030');
+  assert.equal(result.status, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.equal(report.imported, 1);
+  assert.equal(report.unchanged, 1);
+  assert.equal(report.decoded[0].encoding, 'gb18030');
+  result = run('search', '导出');
+  assert.equal(result.status, 0, result.stderr);
+  const hit = JSON.parse(result.stdout)[0];
+  assert.ok(hit.document_id);
+  result = run('graph', hit.document_id);
+  assert.equal(JSON.parse(result.stdout).edges[0].label, '提及');
+  result = run('remove', hit.document_id);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(JSON.parse(run('search', 'NPOI').stdout).length, 0);
+  assert.equal(run('unknown').status, 1);
+  assert.equal(run('serve', '--port', 'not-a-port').status, 1);
+  assert.equal(run('list', '--missing').status, 1);
+});

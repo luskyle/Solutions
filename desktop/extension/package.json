@@ -1,0 +1,194 @@
+{
+  "name": "solutions-knowledge",
+  "displayName": "Knowledge Workbench",
+  "description": "Folder-native knowledge collections, structured readers and Git evidence",
+  "version": "0.2.0",
+  "publisher": "solutions",
+  "private": true,
+  "type": "module",
+  "license": "CC-BY-SA-4.0",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "main": "./dist/extension.cjs",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "Workspace indexing reads local documents and Git history only after trust is granted."
+    },
+    "virtualWorkspaces": {
+      "supported": false
+    }
+  },
+  "scripts": {
+    "build": "npm run check && node build.mjs",
+    "check": "tsc --noEmit",
+    "test": "node --test --experimental-strip-types test/*.test.ts"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "knowledge.openFolder",
+        "title": "知识：打开文件夹",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "knowledge.overview",
+        "title": "知识：集合概览",
+        "icon": "$(library)"
+      },
+      {
+        "command": "knowledge.refresh",
+        "title": "知识：重新索引",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "knowledge.search",
+        "title": "知识：在集合中搜索",
+        "icon": "$(search)"
+      },
+      {
+        "command": "knowledge.read",
+        "title": "知识：阅读来源",
+        "icon": "$(book)"
+      },
+      {
+        "command": "knowledge.history",
+        "title": "知识：Git 演变",
+        "icon": "$(history)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "knowledge",
+          "title": "知识工作区",
+          "icon": "media/knowledge.svg"
+        }
+      ]
+    },
+    "views": {
+      "knowledge": [
+        {
+          "id": "knowledge.collections",
+          "name": "集合与来源"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "knowledge.collections",
+        "contents": "打开本机文件夹，以目录组织知识，原始资料保持不动。\n[打开文件夹](command:knowledge.openFolder)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "knowledge.openFolder",
+          "when": "view == knowledge.collections",
+          "group": "navigation"
+        },
+        {
+          "command": "knowledge.search",
+          "when": "view == knowledge.collections",
+          "group": "navigation"
+        },
+        {
+          "command": "knowledge.refresh",
+          "when": "view == knowledge.collections",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "knowledge.overview",
+          "when": "view == knowledge.collections && viewItem == collection",
+          "group": "inline"
+        },
+        {
+          "command": "knowledge.history",
+          "when": "view == knowledge.collections",
+          "group": "knowledge"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "knowledge.overview",
+          "when": "explorerResourceIsFolder",
+          "group": "knowledge"
+        },
+        {
+          "command": "knowledge.read",
+          "when": "!explorerResourceIsFolder",
+          "group": "knowledge"
+        },
+        {
+          "command": "knowledge.history",
+          "group": "knowledge"
+        }
+      ]
+    },
+    "customEditors": [
+      {
+        "viewType": "knowledge.reader",
+        "displayName": "知识阅读器",
+        "selector": [
+          {
+            "filenamePattern": "*.docx"
+          },
+          {
+            "filenamePattern": "*.pptx"
+          },
+          {
+            "filenamePattern": "*.drawio"
+          },
+          {
+            "filenamePattern": "*.dio"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "configuration": {
+      "title": "Knowledge Workbench",
+      "properties": {
+        "knowledge.excludeDirectories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".git",
+            ".desktop",
+            ".knowledge",
+            "node_modules",
+            "offline"
+          ],
+          "description": "Excluded directory names. Hidden directories and symbolic links are also skipped."
+        },
+        "knowledge.legacyEncoding": {
+          "type": "string",
+          "enum": [
+            "strict",
+            "gb18030"
+          ],
+          "default": "strict",
+          "description": "Use strict UTF-8/BOM decoding, or explicitly permit GB18030 fallback for legacy Chinese files."
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.3.0",
+    "fflate": "^0.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/vscode": "^1.100.0",
+    "esbuild": "^0.27.0",
+    "typescript": "^7.0.2"
+  }
+}

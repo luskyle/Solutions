@@ -1,0 +1,20 @@
+diff --git a/src/vs/workbench/contrib/welcomeOnboarding/browser/onboardingVariationA.ts b/src/vs/workbench/contrib/welcomeOnboarding/browser/onboardingVariationA.ts
+index 8bf729db..f2a4a24d 100644
+--- a/src/vs/workbench/contrib/welcomeOnboarding/browser/onboardingVariationA.ts
++++ b/src/vs/workbench/contrib/welcomeOnboarding/browser/onboardingVariationA.ts
+@@ -78,7 +78,6 @@ type OnboardingActionEvent = {
+ 
+ type EnterpriseSignInUiState = 'options' | 'instance' | 'progress';
+ 
+-assertDefined(product.defaultChatAgent, 'Onboarding requires a default chat agent product configuration.');
+ const defaultChat = product.defaultChatAgent;
+ 
+ /**
+@@ -170,6 +169,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
+ 	}
+ 
+ 	show(): void {
++		assertDefined(product.defaultChatAgent, 'Onboarding requires a default chat agent product configuration.');
+ 		if (this.overlay) {
+ 			return;
+ 		}

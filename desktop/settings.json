@@ -1,0 +1,11 @@
+{
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.startupEditor": "none",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "window.title": "${rootName}${separator}Knowledge Workbench",
+  "telemetry.telemetryLevel": "off",
+  "extensions.autoUpdate": false,
+  "update.mode": "none",
+  "security.workspace.trust.enabled": true,
+  "chat.disableAIFeatures": true
+}

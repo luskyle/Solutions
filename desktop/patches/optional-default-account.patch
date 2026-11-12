@@ -1,0 +1,66 @@
+diff --git a/src/vs/workbench/services/accounts/browser/defaultAccount.ts b/src/vs/workbench/services/accounts/browser/defaultAccount.ts
+index 00164eda..36e5e6e7 100644
+--- a/src/vs/workbench/services/accounts/browser/defaultAccount.ts
++++ b/src/vs/workbench/services/accounts/browser/defaultAccount.ts
+@@ -17,7 +17,7 @@ import { extUri } from '../../../../base/common/resources.js';
+ import { isUndefined, Mutable } from '../../../../base/common/types.js';
+ import { URI } from '../../../../base/common/uri.js';
+ import { IRequestContext } from '../../../../base/parts/request/common/request.js';
+-import { localize2 } from '../../../../nls.js';
++import { localize, localize2 } from '../../../../nls.js';
+ import { Action2, registerAction2 } from '../../../../platform/actions/common/actions.js';
+ import { ICommandService } from '../../../../platform/commands/common/commands.js';
+ import { IConfigurationService } from '../../../../platform/configuration/common/configuration.js';
+@@ -148,14 +148,18 @@ export class DefaultAccountService extends Disposable implements IDefaultAccount
+ 	private readonly _onDidChangeManagedSettingsFreshness = this._register(new Emitter<IManagedSettingsFreshness>());
+ 	readonly onDidChangeManagedSettingsFreshness = this._onDidChangeManagedSettingsFreshness.event;
+ 
+-	private readonly defaultAccountConfig: IDefaultAccountConfig;
++	private readonly defaultAccountConfig: IDefaultAccountConfig | undefined;
+ 	private defaultAccountProvider: IDefaultAccountProvider | null = null;
+ 
+ 	constructor(
+ 		@IProductService productService: IProductService,
+ 	) {
+ 		super();
+-		this.defaultAccountConfig = toDefaultAccountConfig(productService.defaultChatAgent);
++		if (productService.defaultChatAgent) {
++			this.defaultAccountConfig = toDefaultAccountConfig(productService.defaultChatAgent);
++		} else {
++			this.initBarrier.open();
++		}
+ 	}
+ 
+ 	async getDefaultAccount(): Promise<IDefaultAccount | null> {
+@@ -167,6 +171,9 @@ export class DefaultAccountService extends Disposable implements IDefaultAccount
+ 		if (this.defaultAccountProvider) {
+ 			return this.defaultAccountProvider.getDefaultAccountAuthenticationProvider();
+ 		}
++		if (!this.defaultAccountConfig) {
++			throw new Error(localize('defaultAccountUnavailable', "This application does not configure a default account provider."));
++		}
+ 		return {
+ 			...this.defaultAccountConfig.authenticationProvider.default,
+ 			enterprise: false
+@@ -210,7 +217,10 @@ export class DefaultAccountService extends Disposable implements IDefaultAccount
+ 
+ 	async signIn(options?: { additionalScopes?: readonly string[];[key: string]: unknown }): Promise<IDefaultAccount | null> {
+ 		await this.initBarrier.wait();
+-		return this.defaultAccountProvider?.signIn(options) ?? null;
++		if (!this.defaultAccountProvider) {
++			throw new Error(localize('defaultAccountSignInUnavailable', "Sign-in is unavailable because this application does not configure a default account provider."));
++		}
++		return this.defaultAccountProvider.signIn(options);
+ 	}
+ 
+ 	async signOut(): Promise<void> {
+@@ -1665,6 +1675,9 @@ class DefaultAccountProviderContribution extends Disposable implements IWorkbenc
+ 		@IDefaultAccountService defaultAccountService: IDefaultAccountService,
+ 	) {
+ 		super();
++		if (!productService.defaultChatAgent) {
++			return;
++		}
+ 		const defaultAccountProvider = this._register(instantiationService.createInstance(DefaultAccountProvider, toDefaultAccountConfig(productService.defaultChatAgent)));
+ 		defaultAccountService.setDefaultAccountProvider(defaultAccountProvider);
+ 	}

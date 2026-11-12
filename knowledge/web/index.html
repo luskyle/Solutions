@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="knowledge-token" content="__TOKEN__">
+  <title>Solutions · 知识工作台</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">SOLUTIONS / LOCAL KNOWLEDGE</p><h1>让资料产生联系。</h1></div>
+    <span class="badge">本地优先 · 证据驱动</span>
+  </header>
+  <main>
+    <section class="toolbar" aria-label="资料接入与检索">
+      <form id="search-form">
+        <label for="query">搜索知识来源</label>
+        <div class="row"><input id="query" type="search" maxlength="500" placeholder="试试 NPOI、打印机、异步…" required><button type="submit">搜索</button></div>
+      </form>
+      <div class="row import-actions">
+        <label for="legacy-encoding">编码</label>
+        <select id="legacy-encoding"><option value="">UTF-8 / BOM</option><option value="gb18030">允许 GB18030 回退</option></select>
+        <button id="import-library" type="button">导入项目文档</button>
+        <label class="file-button" for="upload">添加文件</label>
+        <input id="upload" type="file" multiple>
+      </div>
+      <p class="hint">支持 Markdown、文本与代码，每份 ≤ 2 MiB。旧中文文件可主动开启 GB18030 回退，报告会标注编码。同名上传会更新来源；不执行代码，不自动调用 AI。</p>
+    </section>
+    <p id="status" role="status" aria-live="polite">正在连接本地知识库…</p>
+    <details id="report" hidden><summary>查看导入报告</summary><pre id="report-content"></pre></details>
+    <div class="workspace">
+      <aside class="panel library">
+        <div class="panel-heading"><h2 id="list-title">知识来源</h2><button id="show-all" class="quiet" type="button">全部</button></div>
+        <div id="documents" class="document-list"></div>
+      </aside>
+      <section class="panel reader">
+        <div id="empty" class="empty"><h2>从一份资料开始</h2><p>导入项目文档，或添加自己的文件。选择来源后，可查看原文、关系与证据。</p><p>结构图只表达“文档提及”，不把共现当作事实。</p></div>
+        <div id="document" hidden>
+          <div class="panel-heading"><div><h2 id="document-title"></h2><p id="document-meta" class="hint"></p></div><button id="remove" class="danger" type="button">删除来源</button></div>
+          <div class="tabs" role="group" aria-label="阅读视图">
+            <button type="button" data-tab="source" aria-pressed="true">原文</button>
+            <button type="button" data-tab="graph" aria-pressed="false">关系图谱</button>
+            <button type="button" data-tab="assertions" aria-pressed="false">知识审核</button>
+          </div>
+          <section id="source-panel"><pre id="source" tabindex="0"></pre></section>
+          <section id="graph-panel" hidden>
+            <div class="row"><label><input id="include-pending" type="checkbox">显示未审核 AI 关系</label><button id="reset-graph" class="quiet" type="button">返回当前来源</button></div>
+            <p class="hint">圆点可展开概念；下方每条关系可定位原文。虚线表示未经审核的 AI 候选。</p>
+            <svg id="graph" viewBox="0 0 760 480" role="img" aria-label="当前来源的局部知识图谱"></svg>
+            <div id="graph-edges"></div>
+          </section>
+          <section id="assertions-panel" hidden>
+            <div class="row"><button id="extract" type="button" disabled>使用本地 AI 抽取</button><span id="model-state" class="hint">AI 未启用</span></div>
+            <p class="hint">仅在点击后将当前来源发送至已配置的本机 Ollama。引用匹配不等于事实正确，请结合版本与条件审核；没有模型时仍可使用搜索和结构图谱。</p>
+            <div id="assertions"></div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>原文是资产，索引与图谱是可重建的视图。资料不会自动发布到原文档站。</footer>
+</body>
+</html>

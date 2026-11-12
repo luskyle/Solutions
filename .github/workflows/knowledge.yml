@@ -1,0 +1,31 @@
+name: knowledge
+
+on:
+  push:
+    paths:
+      - 'knowledge/**'
+      - 'desktop/**'
+      - 'package.json'
+      - '.github/workflows/knowledge.yml'
+  pull_request:
+    paths:
+      - 'knowledge/**'
+      - 'desktop/**'
+      - 'package.json'
+      - '.github/workflows/knowledge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm --prefix desktop/extension ci
+      - run: npm run check
+      - run: npm test
